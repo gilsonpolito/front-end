@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>Lista de Contatos</title>
+      <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <style type="text/css">
+         #contact-list {
+            height: 250px;
+            overflow-y: auto;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         <h1>Lista de Contatos</h1>
+         <form id="formExemplo" data-toggle="validator" role="form">
+           <input type="hidden" id="idHidden" value="" />
+           <div class="form-group">
+              <label for="nameId" class="control-label">Nome</label>
+              <input type="text" id="nameId" placeholder="Nome" class="form-control" required>
+              <div class="help-block with-errors"></div>
+           </div>
+           <div class="form-group">
+              <label for="emailId" class="control-label">Email</label>
+              <input type="email" id="emailId" placeholder="teste@teste.com" class="form-control" required>
+              <div class="help-block with-errors"></div>
+           </div>
+           <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="add-to-list">Adicionar a lista</button>
+              <button type="submit" class="btn btn-primary hidden" id="update-to-list">Atualizar a lista</button>
+           </div>
+         </form>
+         <div id="contact-list">
+           <table class="table-striped" id="contact-table">
+             <th>
+               <tr>
+                 <td class="col-xs-2"></td>
+                 <td class="col-xs-4">Nome</td>
+                 <td class="col-xs-6">Email</td>
+               </tr>
+             </th>
+          </table>
+        </div>
+      </div>
+      <script src="./view.js" ></script>
+      <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+      <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="./node_modules/bootstrap-validator/dist/validator.min.js"></script>
+   </body>
+</html>
