@@ -1,6 +1,6 @@
 window.$ = window.jQuery = require('jquery');
 let $ = require('jquery')
-let urlAPI = "http://localhost:8084/TesteRest/rest/pessoas/"
+let urlAPI = "http://localhost:8084/Backend-Jersey/rest/contatos/"
 
 //função auxiliar que percorre todas as linhas da tabela registrando os eventos nos links (imagens)
 function handler(){
@@ -9,7 +9,7 @@ function handler(){
 			evento.stopImmediatePropagation()
 			evento.preventDefault()
 			let tr = $(this).parent().parent();
-			if(confirm('Deseja remover o registro selecionado?')){
+			if(confirm('Deseja remover o registro contato?')){
 				$.ajax({
 					type: 'DELETE',
 					contentType: 'application/json',
