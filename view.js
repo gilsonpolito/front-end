@@ -112,8 +112,13 @@ function formToJSON() {
 	});
 }
 
-//função para carregar os dados na tabela
-function loadAndDisplayContacts(evento) {
+//função auxiliar para inserir uma linha na tabela de contatos
+function addEntry(id, name, email) {
+	let updateString = '<tr><td class = "col-xs-2"><a href="#" class="action_edit" value="'+id+'"><img src="images/editar.jpeg" /></a><a href="#" class="action_delete" value="'+id+'"><img src="images/excluir.jpeg" /></a></td><td id="nameIdTb" class = "col-xs-4">'+ name +'</td><td id="emailIdTb" class = "col-xs-6">'+ email +'</td></tr>'
+	$('#contact-table').append(updateString)
+}
+
+$(document).ready(function(){
 	$.ajax({
 		type: 'GET',
 		contentType: 'application/json',
@@ -130,14 +135,4 @@ function loadAndDisplayContacts(evento) {
 			alert('Status: ' + textStatus + '\nTipo: ' + errorThrown + '\nMensagem: ' + jqXHR.responseText);
 		}
 	})
-}
-
-//função auxiliar para inserir uma linha na tabela de contatos
-function addEntry(id, name, email) {
-	let updateString = '<tr><td class = "col-xs-2"><a href="#" class="action_edit" value="'+id+'"><img src="images/editar.jpeg" /></a><a href="#" class="action_delete" value="'+id+'"><img src="images/excluir.jpeg" /></a></td><td id="nameIdTb" class = "col-xs-4">'+ name +'</td><td id="emailIdTb" class = "col-xs-6">'+ email +'</td></tr>'
-	$('#contact-table').append(updateString)
-}
-
-$(document).ready(function(evento){
-	loadAndDisplayContacts()
 })
