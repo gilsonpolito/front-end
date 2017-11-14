@@ -2,7 +2,7 @@ window.$ = window.jQuery = require('jquery');
 let $ = require('jquery')
 let urlAPI = "http://localhost:8084/TesteRest/rest/pessoas/"
 
-//função auxiliar que percorrer todas as linhas da tabela registrando os eventos nos links (imagens)
+//função auxiliar que percorre todas as linhas da tabela registrando os eventos nos links (imagens)
 function handler(){
 	$('.action_delete').each(function() {
 		$(this).click(function(evento){
@@ -72,7 +72,7 @@ $('#add-to-list').on('click', (evento) => {
 	}
 })
 
-//registro da ação do botão de atualizar contato
+//registro da ação do botão de atualização de contato
 $('#update-to-list').on('click', (evento) => {
 	evento.preventDefault()
 	let bootstrapValidator = $("#formExemplo").data('bs.validator');
@@ -103,7 +103,7 @@ $('#update-to-list').on('click', (evento) => {
 	}
 })
 
-//função auxiliar para gerar o objeto no formato JSON
+//função auxiliar para gerar objeto no formato JSON
 function formToJSON() {
 	return JSON.stringify({
 		"id": $('#idHidden').val(),
@@ -112,7 +112,7 @@ function formToJSON() {
 	});
 }
 
-//função para carregar os dados da tabela
+//função para carregar os dados na tabela
 function loadAndDisplayContacts(evento) {
 	$.ajax({
 		type: 'GET',
@@ -132,7 +132,7 @@ function loadAndDisplayContacts(evento) {
 	})
 }
 
-//função auxiliar para inserir uma linha na tabela de dados
+//função auxiliar para inserir uma linha na tabela de contatos
 function addEntry(id, name, email) {
 	let updateString = '<tr><td class = "col-xs-2"><a href="#" class="action_edit" value="'+id+'"><img src="images/editar.jpeg" /></a><a href="#" class="action_delete" value="'+id+'"><img src="images/excluir.jpeg" /></a></td><td id="nameIdTb" class = "col-xs-4">'+ name +'</td><td id="emailIdTb" class = "col-xs-6">'+ email +'</td></tr>'
 	$('#contact-table').append(updateString)
