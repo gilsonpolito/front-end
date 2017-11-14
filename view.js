@@ -1,5 +1,6 @@
 window.$ = window.jQuery = require('jquery');
 let $ = require('jquery')
+let urlAPI = "http://localhost:8084/TesteRest/rest/pessoas/"
 
 //função auxiliar que percorrer todas as linhas da tabela registrando os eventos nos links (imagens)
 function handler(){
@@ -11,7 +12,7 @@ function handler(){
 			$.ajax({
 				type: 'DELETE',
 				contentType: 'application/json',
-				url: "http://localhost:8084/TesteRest/rest/pessoas/" + $(this).attr("value"),
+				url: urlAPI + $(this).attr("value"),
 				success: function(jqXHR, textStatus, errorThrown){
 					if(confirm('Deseja remover o registro selecionado?')){
 						tr.remove();
@@ -32,7 +33,7 @@ function handler(){
 			$.ajax({
 				type: 'GET',
 				contentType: 'application/json',
-				url: "http://localhost:8084/TesteRest/rest/pessoas/" + $(this).attr("value"),
+				url: urlAPI + $(this).attr("value"),
 				success: function(jqXHR, textStatus, errorThrown){
 					$('#idHidden').val(jqXHR.id);
 					$('#nameId').val(jqXHR.nome);
@@ -55,11 +56,12 @@ $('#add-to-list').on('click', (evento) => {
 		$.ajax({
 			type: 'POST',
 			contentType: 'application/json',
-			url: "http://localhost:8084/TesteRest/rest/pessoas",
+			url: urlAPI,
 			dataType: "json",
 			data: formToJSON(),
 			success: function(data, textStatus, jqXHR){
 				addEntry(data.id,data.nome, data.email)
+				handler()
 				$("#formExemplo").get(0).reset()
 				$('#add-to-list').addClass('disabled')
 			},
@@ -79,7 +81,7 @@ $('#update-to-list').on('click', (evento) => {
 		$.ajax({
 			type: 'PUT',
 			contentType: 'application/json',
-			url: "http://localhost:8084/TesteRest/rest/pessoas",
+			url: urlAPI,
 			dataType: "json",
 			data: formToJSON(),
 			success: function(data, textStatus, jqXHR){
@@ -115,13 +117,14 @@ function loadAndDisplayContacts(evento) {
 	$.ajax({
 		type: 'GET',
 		contentType: 'application/json',
-		url: "http://localhost:8084/TesteRest/rest/pessoas",
+		url: urlAPI,
 		dataType: "json",
 		data: formToJSON(),
 		success: function(data, textStatus, jqXHR){
 			$.each(data, function(index, itemData) {
 				addEntry(itemData.id, itemData.nome, itemData.email)
 			});
+			handler()
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('Status: ' + textStatus + '\nTipo: ' + errorThrown + '\nMensagem: ' + jqXHR.responseText);
@@ -133,10 +136,8 @@ function loadAndDisplayContacts(evento) {
 function addEntry(id, name, email) {
 	let updateString = '<tr><td class = "col-xs-2"><a href="#" class="action_edit" value="'+id+'"><img src="images/editar.jpeg" /></a><a href="#" class="action_delete" value="'+id+'"><img src="images/excluir.jpeg" /></a></td><td id="nameIdTb" class = "col-xs-4">'+ name +'</td><td id="emailIdTb" class = "col-xs-6">'+ email +'</td></tr>'
 	$('#contact-table').append(updateString)
-	handler()
 }
 
 $(document).ready(function(evento){
 	loadAndDisplayContacts()
-	handler()
 })
