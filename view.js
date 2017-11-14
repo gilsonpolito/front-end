@@ -9,19 +9,19 @@ function handler(){
 			evento.stopImmediatePropagation()
 			evento.preventDefault()
 			let tr = $(this).parent().parent();
-			$.ajax({
-				type: 'DELETE',
-				contentType: 'application/json',
-				url: urlAPI + $(this).attr("value"),
-				success: function(jqXHR, textStatus, errorThrown){
-					if(confirm('Deseja remover o registro selecionado?')){
+			if(confirm('Deseja remover o registro selecionado?')){
+				$.ajax({
+					type: 'DELETE',
+					contentType: 'application/json',
+					url: urlAPI + $(this).attr("value"),
+					success: function(jqXHR, textStatus, errorThrown){
 						tr.remove();
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+						alert('Status: ' + textStatus + '\nTipo: ' + errorThrown + '\nMensagem: ' + jqXHR.responseText);
 					}
-				},
-				error: function(jqXHR, textStatus, errorThrown){
-					alert('Status: ' + textStatus + '\nTipo: ' + errorThrown + '\nMensagem: ' + jqXHR.responseText);
-				}
-			})
+				})
+			}
 		})
 	})
 
